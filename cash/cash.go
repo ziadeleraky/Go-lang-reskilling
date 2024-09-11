@@ -1,6 +1,11 @@
 package main
 
 import "fmt"
+import "os"
+
+func writeBalanceToFile(balance float64) {
+	os.WriteFile("balance.txt", []byte(fmt.Sprintf("%f", balance)), 0644);
+}
 
 func main() {
 	var balance = 1000.0;
@@ -40,4 +45,6 @@ func main() {
 		fmt.Println("Invalid choice!");
 		return;
 	}
+
+	writeBalanceToFile(balance);
 }
