@@ -2,13 +2,22 @@ package main
 
 import "fmt"
 import "os"
+import "strconv"
 
 func writeBalanceToFile(balance float64) {
 	os.WriteFile("balance.txt", []byte(fmt.Sprintf("%f", balance)), 0644);
 }
 
+func getBalanceFromFile() float64 {
+	data, _ := os.ReadFile("balance.txt");
+	balanceText := string(data);
+	balance, _ := strconv.ParseFloat(balanceText, 64);
+
+	return balance;
+}
+
 func main() {
-	var balance = 1000.0;
+	var balance = getBalanceFromFile();
 
 	fmt.Println("Welcome to Go bank!");
 	fmt.Println("What do you want to do?");
