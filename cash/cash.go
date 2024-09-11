@@ -1,23 +1,41 @@
 package main
 
-import "fmt"
-import "os"
-import "strconv"
+import (
+	"errors"
+	"fmt"
+	"os"
+	"strconv"
+)
 
 func writeBalanceToFile(balance float64) {
 	os.WriteFile("balance.txt", []byte(fmt.Sprintf("%f", balance)), 0644);
 }
 
-func getBalanceFromFile() float64 {
-	data, _ := os.ReadFile("balance.txt");
-	balanceText := string(data);
-	balance, _ := strconv.ParseFloat(balanceText, 64);
+func getBalanceFromFile() (float64, error) {
+	data, err := os.ReadFile("balance.txt");
 
-	return balance;
+	if err != nil {
+		return 0.0, errors.New("Error reading balance file");
+	}
+
+	balanceText := string(data);
+	balance, err := strconv.ParseFloat(balanceText, 64);
+
+	if err != nil {
+		return 0.0, errors.New("Error parsing balance");
+	}
+
+	return balance, nil;
 }
 
 func main() {
-	var balance = getBalanceFromFile();
+	var balance, err = getBalanceFromFile();
+
+	if err != nil {
+		fmt.Println("Error reading balance file");
+		fmt.Println(err);
+		return;
+	}
 
 	fmt.Println("Welcome to Go bank!");
 	fmt.Println("What do you want to do?");
