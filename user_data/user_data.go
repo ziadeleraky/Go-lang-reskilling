@@ -21,11 +21,11 @@ func main() {
 	user := userData{firstName, lastName, age};
 
 	// output user data
-	outputUserData(&user);
+	user.outputUserData();
 
 }
 
-func outputUserData(user *userData) {
+func (user userData) outputUserData() {
 	fmt.Println("First Name: " + user.firstName);
 	fmt.Println("Last Name: " + user.lastName);
 	fmt.Println("Age: ", user.age);
