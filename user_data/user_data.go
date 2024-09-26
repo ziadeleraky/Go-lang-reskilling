@@ -18,17 +18,17 @@ func main() {
 	age := getUserData("Enter your age: ");
 
 	// create user data struct
-	userData := userData{firstName, lastName, age};
+	user := userData{firstName, lastName, age};
 
 	// output user data
-	outputUserData(userData.firstName, userData.lastName, userData.age);
+	outputUserData(&user);
 
 }
 
-func outputUserData(firstName string, lastName string, age string) {
-	fmt.Println("First Name: " + firstName);
-	fmt.Println("Last Name: " + lastName);
-	fmt.Println("Age: ", age);
+func outputUserData(user *userData) {
+	fmt.Println("First Name: " + user.firstName);
+	fmt.Println("Last Name: " + user.lastName);
+	fmt.Println("Age: ", user.age);
 }
 
 func getUserData(promptText string) string {
