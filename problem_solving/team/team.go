@@ -12,7 +12,7 @@ func main() {
 
 	for i := 0; i < n; i++ {
 		var a, b, c int
-		fmt.Scan(&a, &b, &c) // Directly scan the inputs without using a reader
+		fmt.Scan(&a, &b, &c)
 		if a+b+c >= 2 {
 			count++
 		}
